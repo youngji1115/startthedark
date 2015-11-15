@@ -19,7 +19,7 @@ class EventManager(models.Manager):
 		return EventQuerySet(self.model)
 
 	def today(self):
-		self.get_query_set().today()
+		return self.get_query_set().today()
 
 # Create your models here.
 class Event(models.Model):
