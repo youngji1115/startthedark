@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.shortcuts import render_to_response, get_object_or_404
 from events.models import Event, Attendance
 from django.template import RequestContext
@@ -12,21 +13,24 @@ from django.contrib.auth.decorators import login_required
 
 def tonight(request):
 	events = Event.objects.today().filter(latest=True)
-	attending = []
-	for event in events:
-		try:
-			Attendance.objects.get(event=event,user=request.user)
-			attending.append(True)
-		except Attendance.DoesNotExist:
-			attending.append(False)
-
 	context = {
-		'events' : zip(events, attending),
+		'events' : events,
 	}
 	return render_to_response(
 		'events/tonight.html',
 		context,
 		context_instance = RequestContext(request),
+	)
+
+def archive(request):
+	events = Event.objects.filter(latest=True)
+	context = {
+		'events' : events,
+	}
+	return render_to_response(
+		'events/archive.html',
+		context,
+		context_instance=RequestContext(request),
 	)
 
 def create(request):

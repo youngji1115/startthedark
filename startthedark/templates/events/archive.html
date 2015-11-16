@@ -1,16 +1,14 @@
 {% extends "base.html" %}
 {% load events_tags %}
 
-{% block title %} Tonight - {{ blcok.super }}{% endblock %}
+{% block title %} Archive - {{block.super}}{% endblock %}
 
 {% block main_content %}
-	<a href="{% url "ev_create" %}">Create an Event</a> 
-
+	<a href="{% url "ev_create" %}">Create an Event</a>
 	{% if events %}
 		{% for e in events %}
 			{% event e %}
-		{% endfor %}
 	{% else %}
-		<p>No events for today. </p>
+		<p> No events for today.</[>
 	{% endif %}
 {% endblock %}
