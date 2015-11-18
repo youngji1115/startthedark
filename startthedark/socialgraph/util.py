@@ -7,7 +7,7 @@ def get_people_user_follows(user):
 
 def get_people_following_user(user):
 	ul = UserLink.objects.filter(to_user=user).values('from_user')
-	return User.objects.filter(id__in=[i['from user'] for i in ul])
+	return User.objects.filter(id__in=[i['from_user'] for i in ul])
 
 def get_mutual_followers(user):
 	follows = UserLink.objects.filter(from_user=user).values('to_user')
